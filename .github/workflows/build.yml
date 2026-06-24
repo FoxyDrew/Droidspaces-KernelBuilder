@@ -317,9 +317,11 @@ jobs:
             ;;
 
             "clang-r563880c")
-            curl -LO https://github.com/LineageOS/android_prebuilts_clang_host_linux-x86_clang-r563880c/archive/refs/heads/main.tar.gz || exit 1
-            # Note: Lineage repos download as main.tar.gz, so rename it so your script tracks it properly:
-            mv main.tar.gz clang-r563880c.tar.gz
+            curl -LO https://dl.google.com/android/repository/android-ndk-r29-linux.zip || exit 1
+            unzip -q android-ndk-r29-linux.zip
+            # Move the inner toolchain folder so it perfectly matches your script's folder setup:
+            mv android-ndk-r29/toolchains/llvm/prebuilt/linux-x86_64 ./clang-r563880c
+            rm -rf android-ndk-r29 android-ndk-r29-linux.zip
             ;;
 
           esac
