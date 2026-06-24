@@ -43,7 +43,7 @@ on:
         description: "Kernel-Source: Kernel repo's org/user on github"
         required: true
         type: choice
-        default: LineageOS
+        default: crdroidandroid
         options:
           - Manual-Type
           - LineageOS
@@ -80,7 +80,7 @@ on:
         description: "Kernel-Branch: such as lineage-23.2 sixteen-qpr1 etc."
         required: true
         type: string
-        default: "lineage-23.2"
+        default: "16.0"
         
       kernel_configs:
         description: "Kernel-Configs: Select ur kernel configs(Use Manual-Type to custom it)"
@@ -108,7 +108,7 @@ on:
         description: "KSU: KernelSU Version"
         required: true
         type: choice
-        default: None
+        default:KernelSU-Next
         options:
           - None
           - Official-KernelSU
@@ -171,13 +171,13 @@ on:
         description: "TMPFS_XATTR: U can enable this if ur kernel has no CONFIG_TMPFS_XATTR=y"
         required: true
         type: boolean
-        default: false
+        default: true
 
       enable_gcc:
         description: "Enable-GCC: Enable the GCC support(mostly for 4.14 and below)"
         required: true
         type: boolean
-        default: false
+        default: true
       
       enable_gcc_32bits:
         description: "Enable-GCC-32Bits: Enable the 32Bits GCC support(mostly for 4.9 and below)"
@@ -195,7 +195,7 @@ on:
         description: "Fuck-Werror: FUCK WERROR IN CONFIGS(by disable WERROR and CC_WERROR)"
         required: true
         type: boolean
-        default: false
+        default: true
 
       enable_my_own_susfs_patch:
         description: "Fuck susfs: apply patches in patches dir about susfs"
@@ -317,11 +317,7 @@ jobs:
             ;;
 
             "clang-r563880c")
-            curl -LO https://dl.google.com/android/repository/android-ndk-r29-linux.zip || exit 1
-            unzip -q android-ndk-r29-linux.zip
-            # Move the inner toolchain folder so it perfectly matches your script's folder setup:
-            mv android-ndk-r29/toolchains/llvm/prebuilt/linux-x86_64 ./clang-r563880c
-            rm -rf android-ndk-r29 android-ndk-r29-linux.zip
+            curl -LO https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/llvm-toolchain/clang-r563880c.tar.gz || exit 1
             ;;
 
           esac
