@@ -108,7 +108,7 @@ on:
         description: "KSU: KernelSU Version"
         required: true
         type: choice
-        default:KernelSU-Next
+        default: KernelSU-Next
         options:
           - None
           - Official-KernelSU
